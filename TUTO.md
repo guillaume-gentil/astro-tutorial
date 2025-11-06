@@ -9,6 +9,7 @@
   - [Les commandes](#les-commandes)
   - [Pour aller plus loin](#pour-aller-plus-loin)
     - [Le Routing dans Astro](#le-routing-dans-astro)
+    - [Le *frontmatter* et son format YAML](#le-frontmatter-et-son-format-yaml)
 
 
 ## Les ressources globales
@@ -87,3 +88,23 @@ npm run dev  # quit with ctrl+c
 [File-based Routing in Astro](https://docs.astro.build/en/basics/astro-pages/#file-based-routing)
 
 [Astro page HTML](https://docs.astro.build/en/basics/astro-pages/#astro-pages)
+
+### Le *frontmatter* et son format YAML
+
+Le *frontmatter*, c'est l'entête présent dans le fichiers `post-x.md` qui permet d'attribuer des propriétés au *post*.
+
+Celui-ci est écrit en [YAML](https://assemble.io/docs/YAML-front-matter.html)
+
+```md
+---
+title: 'My Third Blog Post'
+author: 'Astro Learner'
+description: "I had some challenges, but asking in the community really helped!"
+image: 
+    url: 'https://docs.astro.build/assets/rose.webp'
+    alt: 'The Astro logo on a dark background with a pink glow.'
+tags: ["astro", "blogging", "learning in public"]
+pubDate: 2025-11-06
+---
+It wasn't always smooth sailing, but I'm enjoying building with Astro. And, the [Discord community](https://astro.build/chat) is really friendly and helpful!
+```
