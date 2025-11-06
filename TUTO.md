@@ -1,26 +1,41 @@
 # README
 
-## Les ressources
+- [README](#readme)
+  - [Les ressources globales](#les-ressources-globales)
+    - [Apprendre Astro](#apprendre-astro)
+    - [Dashboard netlify](#dashboard-netlify)
+    - [Obtenir de l'aide sur Astro](#obtenir-de-laide-sur-astro)
+  - [Pipeline CI/CD](#pipeline-cicd)
+  - [Les commandes](#les-commandes)
+  - [Pour aller plus loin](#pour-aller-plus-loin)
+    - [Le Routing dans Astro](#le-routing-dans-astro)
 
 
-> la [communauté discorde](https://discord.com/invite/grF4GTXXYm)
-> 
-> la [doc](https://docs.astro.build/en/getting-started/)
-> 
-> le [tuto](https://docs.astro.build/en/tutorial/1-setup/2/)
-> 
-> le [code du tuto final](https://github.com/withastro/blog-tutorial-demo)
+## Les ressources globales
 
+### Apprendre Astro
 
-> mon propre [repo sur github](https://github.com/guillaume-gentil/astro-tutorial)
->
-> mon [dashboard netlify](https://app.netlify.com/teams/guillaume-gentil/projects)
+* le [tuto](https://docs.astro.build/en/tutorial/1-setup/2/)
+* le [code du tuto final](https://github.com/withastro/blog-tutorial-demo)
+* mon [repo sur github](https://github.com/guillaume-gentil/astro-tutorial)
+
+### Dashboard netlify
+
+* mon [dashboard netlify](https://app.netlify.com/teams/guillaume-gentil/projects)
+
 >   * team: mytheme
 >   * username: guillaume-gentil
 
+### Obtenir de l'aide sur Astro
+
+* la [communauté discorde](https://discord.com/invite/grF4GTXXYm)
+* la [doc](https://docs.astro.build/en/getting-started/)
+
+
+
 ---
 
-## L'hébergement / Le versionning
+## Pipeline CI/CD
 
 🐙 Le **versionning** est assuré par `Git` / `Github`.
 
@@ -37,7 +52,7 @@
 
 ## Les commandes
 
-- initialiser un projet
+Initialiser un projet,
 
 ```sh
 node -v
@@ -48,7 +63,7 @@ npm create astro@latest
 # use minimal (empty) template with dependencies and git
 ```
 
-- désactiver la télémétrie (anonyme)
+Désactiver la télémétrie (bien qu'anonymes),
 
 ```sh
 cd ./tutorial
@@ -56,7 +71,7 @@ cd ./tutorial
 npm run astro telemetry disable
 ```
 
-- démarrer le serveur de développement local
+Démarrer le serveur de développement local,
 
 ```sh
 cd ./tutorial
@@ -64,3 +79,11 @@ cd ./tutorial
 npm run dev  # quit with ctrl+c
 # http://localhost:4321/
 ```
+
+## Pour aller plus loin
+
+### Le Routing dans Astro
+
+[File-based Routing in Astro](https://docs.astro.build/en/basics/astro-pages/#file-based-routing)
+
+[Astro page HTML](https://docs.astro.build/en/basics/astro-pages/#astro-pages)
