@@ -14,6 +14,7 @@
     - [Le JS dans les fichiers `.astro`](#le-js-dans-les-fichiers-astro)
   - [Personnaliser les styles](#personnaliser-les-styles)
     - [`<style>` basique](#style-basique)
+    - [Les variables de style](#les-variables-de-style)
 
 
 ## Les ressources globales
@@ -143,7 +144,7 @@ De même que l'on utilise des variables, Astro permet d'utiliser JS (ou TS) dans
 
 > Il est **obligatoire** d'insérer le code `JS` entre des `{ }` dans le `html` pour qu'il soit reconnu.
 
-> Les fichiers de template `.astro` utilisent la syntaxe `JSX`
+> Les fichiers de template `.astro` utilisent la syntaxe `JSX` à [quelques différences](https://docs.astro.build/en/reference/astro-syntax/#differences-between-astro-and-jsx) prêt
 
 Quelques exemples,
 
@@ -174,6 +175,8 @@ Quelques exemples,
 </ul>
 ```
 
+Pour aller plus loin, [la doc donne quelques exemples d'utilisation courante](https://docs.astro.build/en/reference/astro-syntax/#jsx-like-expressions).
+
 ---
 
 ## Personnaliser les styles
@@ -181,3 +184,44 @@ Quelques exemples,
 ### `<style>` basique
 
 Les fichiers `.astro` acceptent la balise `<style>` comme un fichier `.html`
+
+Voir aussi [la page de la doc astro à ce sujet](https://docs.astro.build/en/guides/styling/#styling-in-astro).
+
+---
+
+### Les variables de style
+
+Il est tout à fait possible d'utiliser des variable JS et de les lire dans le CSS,
+
+```html
+---
+const skillColor = "orange";
+const fontWeight = "bold";
+const textCase = "uppercase";
+---
+
+<html lang="en">
+<head>
+  <!-- ... -->
+  <style define:vars={{skillColor, fontWeight, textCase}}>
+      h1 {
+          color: purple;
+          font-size: 4rem;
+      }
+      .skill {
+          color: var(--skillColor);
+          font-weight: var(--fontWeight);
+          text-transform: var(--textCase);
+      }
+  </style>
+</head>
+<body>
+  <ul>
+    { skills.map(
+      ( skill ) => <li class="skill">{ skill }</li>
+    ) }
+  </ul>
+</body>
+```
+
+[Consulter la doc](https://docs.astro.build/en/guides/styling/#css-variables) pour aller plus loin.
