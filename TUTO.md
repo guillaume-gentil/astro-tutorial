@@ -9,7 +9,8 @@
   - [Les commandes](#les-commandes)
   - [Pour aller plus loin](#pour-aller-plus-loin)
     - [Le Routing dans Astro](#le-routing-dans-astro)
-    - [Le *frontmatter* et son format YAML](#le-frontmatter-et-son-format-yaml)
+    - [Le *frontmatter* des fichier `.md` et son format YAML](#le-frontmatter-des-fichier-md-et-son-format-yaml)
+    - [Le *frontmatter* des fichier `.astro` et le JS](#le-frontmatter-des-fichier-astro-et-le-js)
 
 
 ## Les ressources globales
@@ -89,13 +90,17 @@ npm run dev  # quit with ctrl+c
 
 [Astro page HTML](https://docs.astro.build/en/basics/astro-pages/#astro-pages)
 
-### Le *frontmatter* et son format YAML
+---
+
+### Le *frontmatter* des fichier `.md` et son format YAML
 
 Le *frontmatter*, c'est l'entête présent dans le fichiers `post-x.md` qui permet d'attribuer des propriétés au *post*.
 
 Celui-ci est écrit en [YAML](https://assemble.io/docs/YAML-front-matter.html)
 
-```md
+```yaml
+# exemple du fichier post.md
+
 ---
 title: 'My Third Blog Post'
 author: 'Astro Learner'
@@ -107,4 +112,20 @@ tags: ["astro", "blogging", "learning in public"]
 pubDate: 2025-11-06
 ---
 It wasn't always smooth sailing, but I'm enjoying building with Astro. And, the [Discord community](https://astro.build/chat) is really friendly and helpful!
+```
+
+---
+
+### Le *frontmatter* des fichier `.astro` et le JS
+
+Il est tout a fait possible d'utiliser JavaScript ou TypeScript dans un fichier `page.astro`, la méthode la plus simple est de l'ajouter dans le *frontmatter* et de l'appeler dans le html en utilisant les `{ }`
+
+```js
+// exemple fichier page.astro
+
+---
+const pageTitle = "Mon titre dynamique";
+---
+
+<h1>{pageTitle}</h1>
 ```
