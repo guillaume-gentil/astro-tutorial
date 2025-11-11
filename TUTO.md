@@ -12,6 +12,8 @@
     - [Le *frontmatter* des fichier `.md` et son format `YAML`](#le-frontmatter-des-fichier-md-et-son-format-yaml)
     - [Le *frontmatter* des fichier `.astro` et son format `JS`](#le-frontmatter-des-fichier-astro-et-son-format-js)
     - [Le JS dans les fichiers `.astro`](#le-js-dans-les-fichiers-astro)
+  - [Personnaliser les styles](#personnaliser-les-styles)
+    - [`<style>` basique](#style-basique)
 
 
 ## Les ressources globales
@@ -171,3 +173,11 @@ Quelques exemples,
     ) }
 </ul>
 ```
+
+---
+
+## Personnaliser les styles
+
+### `<style>` basique
+
+Les fichiers `.astro` acceptent la balise `<style>` comme un fichier `.html`
