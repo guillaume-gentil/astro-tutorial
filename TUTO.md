@@ -139,7 +139,9 @@ const pageTitle = "Mon titre dynamique";
 
 De même que l'on utilise des variables, Astro permet d'utiliser JS (ou TS) dans les fichiers `.astro`.
 
-> Il est cependant **obligatoire** d'insérer le code `JS` entre des `{ }` dans le `html` pour qu'il soit reconnu.
+> Il est **obligatoire** d'insérer le code `JS` entre des `{ }` dans le `html` pour qu'il soit reconnu.
+
+> Les fichiers de template `.astro` utilisent la syntaxe `JSX`
 
 Quelques exemples,
 
@@ -169,5 +171,3 @@ Quelques exemples,
     ) }
 </ul>
 ```
-
-
