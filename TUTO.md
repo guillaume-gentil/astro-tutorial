@@ -7,10 +7,11 @@
     - [Obtenir de l'aide sur Astro](#obtenir-de-laide-sur-astro)
   - [Pipeline CI/CD](#pipeline-cicd)
   - [Les commandes](#les-commandes)
-  - [Pour aller plus loin](#pour-aller-plus-loin)
+  - [Fonctionnement du framework `Astro`](#fonctionnement-du-framework-astro)
     - [Le Routing dans Astro](#le-routing-dans-astro)
-    - [Le *frontmatter* des fichier `.md` et son format YAML](#le-frontmatter-des-fichier-md-et-son-format-yaml)
-    - [Le *frontmatter* des fichier `.astro` et le JS](#le-frontmatter-des-fichier-astro-et-le-js)
+    - [Le *frontmatter* des fichier `.md` et son format `YAML`](#le-frontmatter-des-fichier-md-et-son-format-yaml)
+    - [Le *frontmatter* des fichier `.astro` et son format `JS`](#le-frontmatter-des-fichier-astro-et-son-format-js)
+    - [Le JS dans les fichiers `.astro`](#le-js-dans-les-fichiers-astro)
 
 
 ## Les ressources globales
@@ -82,7 +83,7 @@ npm run dev  # quit with ctrl+c
 # http://localhost:4321/
 ```
 
-## Pour aller plus loin
+## Fonctionnement du framework `Astro`
 
 ### Le Routing dans Astro
 
@@ -92,7 +93,7 @@ npm run dev  # quit with ctrl+c
 
 ---
 
-### Le *frontmatter* des fichier `.md` et son format YAML
+### Le *frontmatter* des fichier `.md` et son format `YAML`
 
 Le *frontmatter*, c'est l'entête présent dans le fichiers `post-x.md` qui permet d'attribuer des propriétés au *post*.
 
@@ -116,16 +117,57 @@ It wasn't always smooth sailing, but I'm enjoying building with Astro. And, the 
 
 ---
 
-### Le *frontmatter* des fichier `.astro` et le JS
+### Le *frontmatter* des fichier `.astro` et son format `JS`
 
-Il est tout a fait possible d'utiliser JavaScript ou TypeScript dans un fichier `page.astro`, la méthode la plus simple est de l'ajouter dans le *frontmatter* et de l'appeler dans le html en utilisant les `{ }`
+Il est tout a fait possible d'utiliser JavaScript ou TypeScript dans un fichier `page.astro`, la méthode la plus simple est de l'ajouter dans le *frontmatter* et de l'appeler dans le html en utilisant les `{ }`.
+
+> le frontmatter des fichiers `.astro` ne peut contenir que du `JS` ou du `TS`
 
 ```js
-// exemple fichier page.astro
+// page.astro
 
 ---
 const pageTitle = "Mon titre dynamique";
 ---
 
-<h1>{pageTitle}</h1>
+<h1>{ pageTitle }</h1>
 ```
+
+---
+
+### Le JS dans les fichiers `.astro`
+
+De même que l'on utilise des variables, Astro permet d'utiliser JS (ou TS) dans les fichiers `.astro`.
+
+> Il est cependant **obligatoire** d'insérer le code `JS` entre des `{ }` dans le `html` pour qu'il soit reconnu.
+
+Quelques exemples,
+
+```js
+// page.astro
+
+<ul>
+    <li>My name is { identity.firstName }.</li>
+    <li>
+      I live in { identity.country } and I work as a { identity.occupation }.
+    </li>
+    { identity.hobbies.length >= 2 && (
+      <li>
+        Two of my hobbies are:
+        { identity.hobbies[0] } and { identity.hobbies[1] }
+      </li>
+    ) }
+</ul>
+```
+
+```js
+// page.astro
+
+<ul>
+    { skills.map(
+      ( skill ) => <li>{ skill }</li>
+    ) }
+</ul>
+```
+
+
