@@ -176,6 +176,14 @@ De même que l'on utilise des variables, Astro permet d'utiliser JS (ou TS) dans
 
 > Les fichiers de template `.astro` utilisent la syntaxe `JSX` à [quelques différences](https://docs.astro.build/en/reference/astro-syntax/#differences-between-astro-and-jsx) prêt
 
+> 🚨 le JS inclus dans le frontmatter n'a pas vocation à être utilisé comme script côté client.
+> 
+> Il sert seulement à construire le template HTML via Node (server-side).
+> 
+> Nous verrons par la suite comment créer un `script client-side` pour rendre le site interactif.
+>
+> Pour aller plus loin, il faut se pencher sur la [notion d'`Islands architecture` propre à Astro](https://docs.astro.build/en/concepts/islands/)
+
 Quelques exemples,
 
 ```js
