@@ -21,6 +21,7 @@
   - [Gestion des composants](#gestion-des-composants)
     - [Composant simple](#composant-simple)
     - [Composant enfant et passage de `props`](#composant-enfant-et-passage-de-props)
+    - [Utiliser un composant `Layout` global](#utiliser-un-composant-layout-global)
 
 
 ## Les ressources globales
@@ -109,6 +110,8 @@ Ce sera le cas notamment pour les Page vs Componsants
     |   ├── Footer.astro
     |   ├── Navigation.astro
     |   └── Social.astro
+    ├── layouts
+    |   └── BaseLayout.astro
     ├── pages
     |   ├── posts
     |   |   ├── post-1.md
@@ -427,4 +430,74 @@ import Social from './Social.astro';
     <Social platform="github" username="withastro" />
     <Social platform="youtube" username="astrodotbuild" />
 </footer>
+```
+
+### Utiliser un composant `Layout` global
+
+Autrement dit, on peut définir un modèle de page, un peu à la manière de Wordpress. 
+
+Cela se fait en créant un composant qui accepte l'ajout de contenu en son sein via le composant natif Astro `<slot />`.
+
+Exemple de `src/layouts/BaseLayout.astro`,
+
+```astro
+---
+// import des composants du template
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// import du style général
+import '../styles/global.css';
+
+// Mise en place des props, passées depuis le composant parent (voir index.astro)
+const { pageTitle } = Astro.props;
+---
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={ Astro.generator } />
+    <title>{ pageTitle }</title>
+
+  </head>
+
+  <body>
+
+    <Header />
+
+    <h1>{ pageTitle }</h1>
+
+    <!--
+        Le composant natif Astro <slot /> permet d'insérer un contenu enfant entre les balises du composant :
+        <BaseLayout> _ici, le contenu_ </BaseLayout>
+    -->
+    <slot />
+
+    <Footer />
+
+    <script>
+        import "../scripts/menu.js";
+    </script>
+
+  </body>
+</html>
+```
+
+Cette factorisation est absolument nécessaire pour réduire la taille des fichiers `page.astro`,
+
+```astro
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pageTitle = "Hello";
+---
+<!-- Penser à transférer les props nécessaires dans le composant -->
+<BaseLayout pageTitle={ pageTitle }>
+
+	<h2>My awesome blog subtitle</h2>
+
+</BaseLayout>
+
 ```
