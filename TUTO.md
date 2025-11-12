@@ -13,8 +13,9 @@
     - [Le *frontmatter* des fichier `.astro` et son format `JS`](#le-frontmatter-des-fichier-astro-et-son-format-js)
     - [Le JS dans les fichiers `.astro`](#le-js-dans-les-fichiers-astro)
   - [Personnaliser les styles](#personnaliser-les-styles)
-    - [`<style>` basique](#style-basique)
-    - [Les variables de style](#les-variables-de-style)
+    - [`<style>` basique local](#style-basique-local)
+    - [Les variables de style locales](#les-variables-de-style-locales)
+    - [Ajouter un style global](#ajouter-un-style-global)
 
 
 ## Les ressources globales
@@ -181,7 +182,7 @@ Pour aller plus loin, [la doc donne quelques exemples d'utilisation courante](ht
 
 ## Personnaliser les styles
 
-### `<style>` basique
+### `<style>` basique local
 
 Les fichiers `.astro` acceptent la balise `<style>` comme un fichier `.html`
 
@@ -189,7 +190,7 @@ Voir aussi [la page de la doc astro à ce sujet](https://docs.astro.build/en/gui
 
 ---
 
-### Les variables de style
+### Les variables de style locales
 
 Il est tout à fait possible d'utiliser des variable JS et de les lire dans le CSS,
 
@@ -225,3 +226,21 @@ const textCase = "uppercase";
 ```
 
 [Consulter la doc](https://docs.astro.build/en/guides/styling/#css-variables) pour aller plus loin.
+
+---
+
+### Ajouter un style global
+
+Il est très facile d'utiliser une feuille de style globale (par exemple pour un reset, normalize,...). Pour cela, il suffit d'importer la ou les feuilles de styles dans le *frontmatter* du fichier `.astro` comme ceci,
+
+```astro
+---
+import '../styles/global.css';
+// puis, le reste du code JS
+---
+<!-- enfin, le code HTML de la page -->
+```
+
+> Ce style s'applique globalement mais si le fichier contient du `<style>` localement, celui-ci sera prioritaire.
+
+---
