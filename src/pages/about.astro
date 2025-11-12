@@ -1,4 +1,7 @@
 ---
+import Footer from '../components/Footer.astro';
+import Navigation from '../components/Navigation.astro';
+
 import '../styles/global.css';
 
 const pageTitle = "About Me";
@@ -41,10 +44,7 @@ const textCase = "uppercase";
         </style>
     </head>
     <body>
-        <!-- Astro uses standard HTML <a> elements to navigate between pages (also called routes) -->
-        <a href="/">Home</a>
-        <a href="/about/">About</a>
-        <a href="/blog/">Blog</a>
+		<Navigation />
 
         <h1>{ pageTitle }</h1>
 
@@ -91,6 +91,6 @@ const textCase = "uppercase";
           ? <p>My goal is to finish in 3 days.</p>
           : <p>My goal is not 3 days.</p>
         }
-
+        <Footer />
     </body>
 </html>

@@ -17,6 +17,9 @@
     - [`<style>` basique local](#style-basique-local)
     - [Les variables de style locales](#les-variables-de-style-locales)
     - [Ajouter un style global](#ajouter-un-style-global)
+  - [Gestion des composants](#gestion-des-composants)
+    - [Composant simple](#composant-simple)
+    - [Composant enfant et passage de `props`](#composant-enfant-et-passage-de-props)
 
 
 ## Les ressources globales
@@ -270,3 +273,102 @@ import '../styles/global.css';
 > Ce style s'applique globalement mais si le fichier contient du `<style>` localement, celui-ci sera prioritaire.
 
 ---
+
+## Gestion des composants
+
+> Astro permet de penser son interface en terme de composants réutilisables.
+>
+> Exemples :
+> - Navigations (responsive)
+> - Footer
+> - Média Sociaux
+
+Les composants sont placés dans le dossier `src/components/` et possèdent l'extension `.astro`.
+
+Le dossier `components` est important pour siginifier à Astro que ce ne sont pas de page mais bien des composants.
+
+> Aller plus loin sur l'[utilisation des composants dans Astro](https://docs.astro.build/en/basics/astro-components/).
+
+---
+
+### Composant simple
+
+Exemple du composant `src/components/Navigation.astro`,
+
+```astro
+<!-- si il n'y a rien a mettre dans le frontmatter, il est inutile de mettre les `---` ouvrantes et fermantes -->
+
+<a href="/">Home</a>
+<a href="/about/">About</a>
+<a href="/blog/">Blog</a>
+```
+
+Et son utilisation (via un import JS) dans un fichier `.astro`,
+
+```astro
+---
+import Navigation from '../components/Navigation.astro';
+
+import '../styles/global.css';
+
+// ...
+---
+<!-- ... -->
+<body>
+  <Navigation />
+  <!-- ... -->
+</body>
+```
+
+---
+
+### Composant enfant et passage de `props`
+
+Prenons l'exemple d'un `Footer` dans lequel sera utilisé le composant `Social`.
+
+```
+└── src
+    ├── components
+    |   ├── Footer.astro
+    |   ├── Social.astro
+```
+
+Le composant `Social` avec ses propriétés et son style,
+
+```astro
+---
+const { platform, username } = Astro.props;
+---
+<a href={`https://www.${platform}.com/${username}`}>{platform}</a>
+
+<style>
+  a {
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: #4c1d95;
+    text-decoration: none;
+  }
+</style>
+```
+
+Et le composant `Footer` qui transmet des `props` au composant `Social` ainsi que son style,
+
+```astro
+---
+import Social from './Social.astro';
+---
+<style>
+  footer {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+</style>
+
+<hr>
+<footer>
+    <Social platform="twitter" username="astrodotbuild" />
+    <Social platform="github" username="withastro" />
+    <Social platform="youtube" username="astrodotbuild" />
+</footer>
+```
