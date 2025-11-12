@@ -1,11 +1,14 @@
 ---
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
-import '../styles/global.css';
-
+/* ************
+ * Props
+ * ********** */
 const pageTitle = "About Me";
 
+/* ************
+ * Data for the page
+ * ********** */
 const identity = {
     firstName: "Sarah",
     country: "Canada",
@@ -19,84 +22,77 @@ const happy = true;
 const finished = false;
 const goal = 3;
 
+/* ************
+ * CSS Variables
+ * ********** */
 const skillColor = "orange";
 const fontWeight = "bold";
 const textCase = "uppercase";
 ---
+<!--
+    Le paramètre `is:global` permet de styliser les éléments au-delà de la portée de ce fichier
+    (contrairement au fonctionnement par défaut d'Astro qui isole les styles par composant).
+    En particulier, dans le cas de cette page, il permet de styliser le <h1>.
+    Il est même possible de styliser les Composants enfants utilisés dans BaseLayout.astro
+    Bien sûr, ce style ne sera appliqué que lorsque la page courante est affichée.
+-->
+<style is:global define:vars={{skillColor, fontWeight, textCase}}>
+    h1 {
+        color: purple;
+        font-size: 4rem;
+    }
+    .skill {
+        color: var(--skillColor);
+        font-weight: var(--fontWeight);
+        text-transform: var(--textCase);
+    }
+</style>
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={ Astro.generator } />
-        <title>{ pageTitle }</title>
-        <style define:vars={{skillColor, fontWeight, textCase}}>
-            h1 {
-                color: purple;
-                font-size: 4rem;
-            }
-            .skill {
-                color: var(--skillColor);
-                font-weight: var(--fontWeight);
-                text-transform: var(--textCase);
-            }
-        </style>
-    </head>
-    <body>
-		<Header />
+<BaseLayout pageTitle={ pageTitle }>
 
-        <h1>{ pageTitle }</h1>
+    <h2>... and my new Astro site!</h2>
 
-        <h2>... and my new Astro site!</h2>
+    <p>
+        I am working through Astro's introductory tutorial. This is the
+        second page on my website, and it's the first one I built myself!
+    </p>
 
-        <p>
-            I am working through Astro's introductory tutorial. This is the
-            second page on my website, and it's the first one I built myself!
-        </p>
+    <p>
+        This site will update as I complete more of the tutorial, so keep
+        checking back and see how my journey is going!
+    </p>
 
-        <p>
-            This site will update as I complete more of the tutorial, so keep
-            checking back and see how my journey is going!
-        </p>
+    <p>Here are a few facts about me:</p>
 
-        <p>Here are a few facts about me:</p>
-
-        <ul>
-            <li>My name is { identity.firstName }.</li>
-            <li>
-                I live in { identity.country } and I work as a { identity.occupation }.
-            </li>
-            { identity.hobbies.length >= 2 && (
-                    <li>
-                        Two of my hobbies are:
-                        { identity.hobbies[0] } and { identity.hobbies[1] }
-                    </li>
-                )
-            }
-        </ul>
-
-        <p>My skills are:</p>
-
-        <ul>
-            { skills.map(
-                ( skill ) => <li class="skill">{ skill }</li>
-            ) }
-        </ul>
-
-        { happy && <p>I am happy to be learning Astro!</p> }
-
-        { finished && <p>I finished this tutorial!</p> }
-
-        { goal === 3
-          ? <p>My goal is to finish in 3 days.</p>
-          : <p>My goal is not 3 days.</p>
+    <ul>
+        <li>My name is { identity.firstName }.</li>
+        <li>
+            I live in { identity.country } and I work as a { identity.occupation }.
+        </li>
+        { identity.hobbies.length >= 2 && (
+                <li>
+                    Two of my hobbies are:
+                    { identity.hobbies[0] } and { identity.hobbies[1] }
+                </li>
+            )
         }
+    </ul>
 
-        <Footer />
+    <p>My skills are:</p>
 
-		<script>
-			import "../scripts/menu.js";
-		</script>
-    </body>
-</html>
+    <ul>
+        { skills.map(
+            ( skill ) => <li class="skill">{ skill }</li>
+        ) }
+    </ul>
+
+    { happy && <p>I am happy to be learning Astro!</p> }
+
+    { finished && <p>I finished this tutorial!</p> }
+
+    { goal === 3
+        ? <p>My goal is to finish in 3 days.</p>
+        : <p>My goal is not 3 days.</p>
+    }
+
+</BaseLayout>

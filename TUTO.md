@@ -21,7 +21,7 @@
   - [Gestion des composants](#gestion-des-composants)
     - [Composant simple](#composant-simple)
     - [Composant enfant et passage de `props`](#composant-enfant-et-passage-de-props)
-    - [Utiliser un composant `Layout` global](#utiliser-un-composant-layout-global)
+    - [Utiliser un composant `Layout` global et créer un modèle de style pour les pages](#utiliser-un-composant-layout-global-et-créer-un-modèle-de-style-pour-les-pages)
 
 
 ## Les ressources globales
@@ -432,11 +432,15 @@ import Social from './Social.astro';
 </footer>
 ```
 
-### Utiliser un composant `Layout` global
+### Utiliser un composant `Layout` global et créer un modèle de style pour les pages
 
-Autrement dit, on peut définir un modèle de page, un peu à la manière de Wordpress. 
+Autrement dit, on peut définir un modèle de page, comme on peut le faire sur Wordpress par exemple.
 
-Cela se fait en créant un composant qui accepte l'ajout de contenu en son sein via le composant natif Astro `<slot />`.
+Cela se fait en créant un composant qui accepte l'ajout de contenu en son sein via le composant natif Astro `<slot />`
+
+> Les [🟢 slots](https://docs.astro.build/en/basics/astro-components/#slots) peuvent même être multiple grâce au nommage, ou inclure des fallbacks en cas d'absence !
+
+> Les [🟢 layouts](https://docs.astro.build/en/basics/layouts/) ne sont que des composants Astro qui acceptent l'insertion de contenu.
 
 Exemple de `src/layouts/BaseLayout.astro`,
 
@@ -499,5 +503,111 @@ const pageTitle = "Hello";
 	<h2>My awesome blog subtitle</h2>
 
 </BaseLayout>
+```
 
+Et dans le cas d'une page avec sa logique propre et son style propre, cela fonctionne aussi !
+
+> Il est même possible d'appliquer du style aux éléments du composant `BaseLayout` via la `page.astro` qui fait appel à lui (comme dans le cas de `about.astro`)
+>
+> Pour cela, il suffit d'étendre la portée du CSS (qui se trouve maintenant dans le `<body>`) via l'attribut `<style is:global>`
+
+```astro
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+/* ************
+ * Props
+ * ********** */
+const pageTitle = "About Me";
+
+/* ************
+ * Data for the page
+ * ********** */
+const identity = {
+    firstName: "Sarah",
+    country: "Canada",
+    occupation: "Technical Writer",
+    hobbies: ["photography", "birdwatching", "baseball"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+
+/* ************
+ * CSS Variables
+ * ********** */
+const skillColor = "orange";
+const fontWeight = "bold";
+const textCase = "uppercase";
+---
+<!--
+    Le paramètre `is:global` permet de styliser les éléments au-delà de la portée de ce fichier
+    (contrairement au fonctionnement par défaut d'Astro qui isole les styles par composant).
+    En particulier, dans le cas de cette page, il permet de styliser le <h1>.
+    Il est même possible de styliser les Composants enfants utilisés dans BaseLayout.astro
+    Bien sûr, ce style ne sera appliqué que lorsque la page courante est affichée.
+-->
+<style is:global define:vars={{skillColor, fontWeight, textCase}}>
+    h1 {
+        color: purple;
+        font-size: 4rem;
+    }
+    .skill {
+        color: var(--skillColor);
+        font-weight: var(--fontWeight);
+        text-transform: var(--textCase);
+    }
+</style>
+
+<BaseLayout pageTitle={ pageTitle }>
+
+    <h2>... and my new Astro site!</h2>
+
+    <p>
+        I am working through Astro's introductory tutorial. This is the
+        second page on my website, and it's the first one I built myself!
+    </p>
+
+    <p>
+        This site will update as I complete more of the tutorial, so keep
+        checking back and see how my journey is going!
+    </p>
+
+    <p>Here are a few facts about me:</p>
+
+    <ul>
+        <li>My name is { identity.firstName }.</li>
+        <li>
+            I live in { identity.country } and I work as a { identity.occupation }.
+        </li>
+        { identity.hobbies.length >= 2 && (
+                <li>
+                    Two of my hobbies are:
+                    { identity.hobbies[0] } and { identity.hobbies[1] }
+                </li>
+            )
+        }
+    </ul>
+
+    <p>My skills are:</p>
+
+    <ul>
+        { skills.map(
+            ( skill ) => <li class="skill">{ skill }</li>
+        ) }
+    </ul>
+
+    { happy && <p>I am happy to be learning Astro!</p> }
+
+    { finished && <p>I finished this tutorial!</p> }
+
+    { goal === 3
+        ? <p>My goal is to finish in 3 days.</p>
+        : <p>My goal is not 3 days.</p>
+    }
+
+</BaseLayout>
 ```
