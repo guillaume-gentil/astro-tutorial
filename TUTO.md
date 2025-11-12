@@ -8,6 +8,7 @@
   - [Pipeline CI/CD](#pipeline-cicd)
   - [Les commandes](#les-commandes)
   - [Fonctionnement du framework `Astro`](#fonctionnement-du-framework-astro)
+    - [Structure des dossiers d'un projet Astro](#structure-des-dossiers-dun-projet-astro)
     - [Le Routing dans Astro](#le-routing-dans-astro)
     - [Le *frontmatter* des fichier `.md` et son format `YAML`](#le-frontmatter-des-fichier-md-et-son-format-yaml)
     - [Le *frontmatter* des fichier `.astro` et son format `JS`](#le-frontmatter-des-fichier-astro-et-son-format-js)
@@ -88,6 +89,31 @@ npm run dev  # quit with ctrl+c
 ```
 
 ## Fonctionnement du framework `Astro`
+
+### Structure des dossiers d'un projet Astro
+
+La structure des dossier a son importance car Astro de va "interpréter" différement les fichiers selon leur emplacement.
+
+Ce sera le cas notamment pour les Page vs Componsants
+
+```md
+└── src
+    ├── components
+    |   ├── Footer.astro
+    |   ├── Navigation.astro
+    |   └── Social.astro
+    ├── pages
+    |   ├── posts
+    |   |   ├── post-1.md
+    |   |   ├── post-2.md
+    |   |   └── post-3.md
+    |   ├── about.astro
+    |   ├── blog.astro
+    |   └── index.astro
+    └── styles
+        ├── reset.css
+        └── global.css
+```
 
 ### Le Routing dans Astro
 
