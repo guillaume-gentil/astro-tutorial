@@ -2,8 +2,8 @@
 
 - [README](#readme)
   - [Les ressources globales](#les-ressources-globales)
-    - [Apprendre Astro](#apprendre-astro)
     - [Dashboard netlify](#dashboard-netlify)
+    - [Apprendre Astro](#apprendre-astro)
     - [Obtenir de l'aide sur Astro](#obtenir-de-laide-sur-astro)
   - [Pipeline CI/CD](#pipeline-cicd)
   - [Les commandes](#les-commandes)
@@ -12,7 +12,8 @@
     - [Le Routing dans Astro](#le-routing-dans-astro)
     - [Le *frontmatter* des fichier `.md` et son format `YAML`](#le-frontmatter-des-fichier-md-et-son-format-yaml)
     - [Le *frontmatter* des fichier `.astro` et son format `JS`](#le-frontmatter-des-fichier-astro-et-son-format-js)
-    - [Le JS dans les fichiers `.astro`](#le-js-dans-les-fichiers-astro)
+    - [Le JS dans les fichiers `.astro` (server-side)](#le-js-dans-les-fichiers-astro-server-side)
+    - [Les scripts JS pour ajouter de l'interactivité sur un site web Astro (client-side)](#les-scripts-js-pour-ajouter-de-linteractivité-sur-un-site-web-astro-client-side)
   - [Personnaliser les styles](#personnaliser-les-styles)
     - [`<style>` basique local](#style-basique-local)
     - [Les variables de style locales](#les-variables-de-style-locales)
@@ -24,12 +25,6 @@
 
 ## Les ressources globales
 
-### Apprendre Astro
-
-* le [tuto](https://docs.astro.build/en/tutorial/1-setup/2/)
-* le [code du tuto final](https://github.com/withastro/blog-tutorial-demo)
-* mon [repo sur github](https://github.com/guillaume-gentil/astro-tutorial)
-
 ### Dashboard netlify
 
 * mon [dashboard netlify](https://app.netlify.com/teams/guillaume-gentil/projects)
@@ -37,12 +32,21 @@
 >   * team: mytheme
 >   * username: guillaume-gentil
 
+---
+
+### Apprendre Astro
+
+* le [tuto](https://docs.astro.build/en/tutorial/1-setup/2/)
+* le [code du tuto final](https://github.com/withastro/blog-tutorial-demo)
+* mon [repo sur github](https://github.com/guillaume-gentil/astro-tutorial)
+
+---
+
 ### Obtenir de l'aide sur Astro
 
-* la [communauté discorde](https://discord.com/invite/grF4GTXXYm)
 * la [doc](https://docs.astro.build/en/getting-started/)
-
-
+* la [communauté discorde](https://discord.com/invite/grF4GTXXYm)
+* le site d'[astuces](https://astro-tips.dev/) partagées par la communauté, et notament comment utiliser [GSAP dans mon projet Astro](https://astro-tips.dev/tips/how-to-add-gsap/)
 
 ---
 
@@ -113,6 +117,9 @@ Ce sera le cas notamment pour les Page vs Componsants
     |   ├── about.astro
     |   ├── blog.astro
     |   └── index.astro
+    ├── scripts
+    |   ├── script-1.js
+    |   └── script-2.js
     └── styles
         ├── reset.css
         └── global.css
@@ -120,9 +127,9 @@ Ce sera le cas notamment pour les Page vs Componsants
 
 ### Le Routing dans Astro
 
-[File-based Routing in Astro](https://docs.astro.build/en/basics/astro-pages/#file-based-routing)
+[🟢 File-based Routing in Astro](https://docs.astro.build/en/basics/astro-pages/#file-based-routing)
 
-[Astro page HTML](https://docs.astro.build/en/basics/astro-pages/#astro-pages)
+[🟢 Astro page HTML](https://docs.astro.build/en/basics/astro-pages/#astro-pages)
 
 ---
 
@@ -130,7 +137,7 @@ Ce sera le cas notamment pour les Page vs Componsants
 
 Le *frontmatter*, c'est l'entête présent dans le fichiers `post-x.md` qui permet d'attribuer des propriétés au *post*.
 
-Celui-ci est écrit en [YAML](https://assemble.io/docs/YAML-front-matter.html)
+Celui-ci est écrit en [🟢 YAML](https://assemble.io/docs/YAML-front-matter.html)
 
 ```yaml
 # exemple du fichier post.md
@@ -168,13 +175,13 @@ const pageTitle = "Mon titre dynamique";
 
 ---
 
-### Le JS dans les fichiers `.astro`
+### Le JS dans les fichiers `.astro` (server-side)
 
 De même que l'on utilise des variables, Astro permet d'utiliser JS (ou TS) dans les fichiers `.astro`.
 
 > Il est **obligatoire** d'insérer le code `JS` entre des `{ }` dans le `html` pour qu'il soit reconnu.
 
-> Les fichiers de template `.astro` utilisent la syntaxe `JSX` à [quelques différences](https://docs.astro.build/en/reference/astro-syntax/#differences-between-astro-and-jsx) prêt
+> Les fichiers de template `.astro` utilisent la syntaxe `JSX` à [🟢 quelques différences](https://docs.astro.build/en/reference/astro-syntax/#differences-between-astro-and-jsx) prêt
 
 > 🚨 le JS inclus dans le frontmatter n'a pas vocation à être utilisé comme script côté client.
 > 
@@ -182,7 +189,7 @@ De même que l'on utilise des variables, Astro permet d'utiliser JS (ou TS) dans
 > 
 > Nous verrons par la suite comment créer un `script client-side` pour rendre le site interactif.
 >
-> Pour aller plus loin, il faut se pencher sur la [notion d'`Islands architecture` propre à Astro](https://docs.astro.build/en/concepts/islands/)
+> Pour aller plus loin, il faut se pencher sur la [🟢 notion d'`Islands architecture` propre à Astro](https://docs.astro.build/en/concepts/islands/)
 
 Quelques exemples,
 
@@ -213,7 +220,48 @@ Quelques exemples,
 </ul>
 ```
 
-Pour aller plus loin, [la doc donne quelques exemples d'utilisation courante](https://docs.astro.build/en/reference/astro-syntax/#jsx-like-expressions).
+Pour aller plus loin, [🟢 la doc donne quelques exemples d'utilisation courante](https://docs.astro.build/en/reference/astro-syntax/#jsx-like-expressions).
+
+---
+
+### Les scripts JS pour ajouter de l'interactivité sur un site web Astro (client-side)
+
+Pour ajouter du JS *client-side* aux pages et composants Astro, il faut insérer le code dans une balise `<script>...</script>`, en pied de page comme on le ferait pour du html standard.
+
+Une autre solution est possible et passe par l'importation d'un fichier `src/scripts/mon-script.js` dédié puis, de l'importer en pied de page.
+
+Exemple de fichier `src/scripts/mon-script.js`,
+
+```js
+const menu = document.querySelector('.menu');
+
+menu?.addEventListener('click', () => {
+const isExpanded = menu.getAttribute('aria-expanded') === 'true';
+menu.setAttribute('aria-expanded', `${!isExpanded}`);
+});
+```
+
+Et son importation depuis le pied de la page avant la fermeture de la balise `</body>` sur chaque Page,
+
+```astro
+<!-- ... -->
+</footer>
+
+<script>
+  import "../scripts/menu.js";
+</script>
+```
+
+Pour bien comprendre comment Astro gère les scripts, lire la [🟢 page de la doc dédiée](https://docs.astro.build/en/guides/client-side-scripts/).
+
+On y apprend notament que :
+
+- Par défaut, Astro traite les balises `<script>` qui ne contiennent aucun attribut (autre que `src`) selon les points suivants
+  - tous les scripts sont lu comme du code `TypeScript` par défaut,
+  - tous les imports (fichiers locaux, modules npm) sont regroupés lors du build,
+  - les scripts sont traités automatiquement comme des `type="module"`,
+  - si un composant contenant un `<script>` est utilisé plusieurs fois sur une page, le script ne sera inclus qu'une seule fois,
+  - si le script est suffisamment petit, Astro l'intégrera directement dans le HTML lors du build afin de réduire le nombre de requêtes.
 
 ---
 
@@ -223,7 +271,7 @@ Pour aller plus loin, [la doc donne quelques exemples d'utilisation courante](ht
 
 Les fichiers `.astro` acceptent la balise `<style>` comme un fichier `.html`
 
-Voir aussi [la page de la doc astro à ce sujet](https://docs.astro.build/en/guides/styling/#styling-in-astro).
+Voir aussi [🟢 la page de la doc astro à ce sujet](https://docs.astro.build/en/guides/styling/#styling-in-astro).
 
 ---
 
@@ -262,7 +310,7 @@ const textCase = "uppercase";
 </body>
 ```
 
-[Consulter la doc](https://docs.astro.build/en/guides/styling/#css-variables) pour aller plus loin.
+[🟢 Consulter la doc](https://docs.astro.build/en/guides/styling/#css-variables) pour aller plus loin.
 
 ---
 
@@ -295,7 +343,7 @@ Les composants sont placés dans le dossier `src/components/` et possèdent l'ex
 
 Le dossier `components` est important pour siginifier à Astro que ce ne sont pas de page mais bien des composants.
 
-> Aller plus loin sur l'[utilisation des composants dans Astro](https://docs.astro.build/en/basics/astro-components/).
+> 🟢 Aller plus loin sur l'[utilisation des composants dans Astro](https://docs.astro.build/en/basics/astro-components/).
 
 ---
 
